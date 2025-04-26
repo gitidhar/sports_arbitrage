@@ -1,6 +1,6 @@
 import os, time, requests, pandas as pd
 from dotenv import load_dotenv
-
+from arb_engine import print_arbs
 load_dotenv()
 
 API_KEY = os.getenv("ODDS_API_KEY")
@@ -22,4 +22,5 @@ if isinstance(data, dict) and data.get("error_code"):
     raise RuntimeError(f"{data['error_code']}: {data['message']}")
 
 pd.json_normalize(data).to_csv("prices.csv", mode="a", index=False)
-time.sleep(30)
+
+print_arbs()
