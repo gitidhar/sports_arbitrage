@@ -1,12 +1,25 @@
-# odds_collector.py – pulls best prices every 30 s
-
-
 import os, time, requests, pandas as pd
+from dotenv import load_dotenv
 
+load_dotenv()
 
 API_KEY = os.getenv("ODDS_API_KEY")
-URL = "https://api.the-odds-api.com/v4/sports/soccer_epl/odds?markets=h2h&apiKey=" + API_KEY
-while True:
-    df = pd.json_normalize(requests.get(URL).json())
-    df.to_csv("prices.csv", mode="a")
-    time.sleep(30)
+BASE = "https://api.the-odds-api.com/v4/sports/soccer_epl/odds"
+
+PARAMS = {
+    "apiKey": API_KEY,
+    "regions": "uk",
+    "markets": "h2h",
+    "oddsFormat": "decimal",
+    "dateFormat": "iso"
+}
+
+# while True:
+r = requests.get(BASE, params=PARAMS, timeout=10)
+data = r.json()
+
+if isinstance(data, dict) and data.get("error_code"):
+    raise RuntimeError(f"{data['error_code']}: {data['message']}")
+
+pd.json_normalize(data).to_csv("prices.csv", mode="a", index=False)
+time.sleep(30)
