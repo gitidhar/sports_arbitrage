@@ -8,3 +8,9 @@ __pycache__/
 
 # Environment variables
 .env
+
+#found arbs
+arbs.txt
+
+#intermediate prices 
+prices.csv

@@ -1,11 +1,16 @@
 import pandas as pd
 import ast         # safe string-to-Python converter
+import logging
 
-def print_arbs(csv_path: str = "prices.csv",
+def scan_arbs(csv_path: str = "prices.csv",
                bankroll: float = 100.0,
                market_key: str = "h2h") -> None:
    
-
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(message)s",
+        filename="arbs.txt"
+    )
     df = pd.read_csv(csv_path)
 
     for _, row in df.iterrows():
@@ -33,7 +38,7 @@ def print_arbs(csv_path: str = "prices.csv",
         implied_sum = sum(1 / p for p in best_price.values())
         edge = 1 - implied_sum
         if edge <= 0:
-            print ("no arbitrage here")
+            # print ("no arbitrage here")
             continue                  # no arbitrage here
 
         
@@ -43,10 +48,9 @@ def print_arbs(csv_path: str = "prices.csv",
                    for n, price in best_price.items()}
         profit  = round(next(iter(profits.values())), 2)   # same for every outcome
 
-       
-        print(f"\n  ARB FOUND    {home} vs {away}   edge={edge*100:.2f}%")
+        logging.info("")
+        logging.info(f"\n  ARB FOUND    {home} vs {away}   edge={edge*100:.2f}%")
         for n in best_price:
-            print(f"   {n:<18}  @ {best_price[n]:<6.2f} "
+            logging.info(f"   {n:<18}  @ {best_price[n]:<6.2f} "
                   f"{best_book[n]:<12}  stake ${stakes[n]:.2f}")
-        print(f"   Guaranteed profit (bankroll ${bankroll:.2f}) ➜  ${profit:.2f}")
-        print("-" * 54)
+        logging.info(f"   Guaranteed profit (bankroll ${bankroll:.2f}) ➜  ${profit:.2f}")
