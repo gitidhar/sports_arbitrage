@@ -7,7 +7,6 @@ def size_bank_roll(prices: dict[str, float], implied_sum, bankroll: float):
     return stakes
 
 
-
 def analyze_for_arb(events: list[dict], bankroll: float, mrkt_key: str="h2h") -> list[ArbitrageOpportunity]:
     opportunities: list[ArbitrageOpportunity] = []
     for event in events:
