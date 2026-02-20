@@ -1,6 +1,6 @@
 # src/sports_arbitrage/cli/main.py
-from src.config.settings import load_settings
-from src.app.arbscan import run_arb_scan
+from sparb.config.settings import load_settings
+from sparb.app.arbscan import run_arb_scan
 
 def main() -> None:
     settings = load_settings()

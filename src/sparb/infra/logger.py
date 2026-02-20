@@ -1,5 +1,5 @@
 import logging
-from src.domain.models import ArbitrageOpportunity
+from sparb.domain.models import ArbitrageOpportunity
 from pathlib import Path
 
 def initialize_logger(log_path: str) -> logging.Logger:

@@ -1,8 +1,8 @@
 # src/sports_arbitrage/app/services.py
-from src.config.settings import Settings
-from src.ingestion.providers.odds_api import fetch_all_live
-from src.domain.arb import analyze_for_arb
-from src.infra.logger import initialize_logger, log_opportunities
+from sparb.config.settings import Settings
+from sparb.ingestion.providers.odds_api import fetch_all_live
+from sparb.domain.arb import analyze_for_arb
+from sparb.infra.logger import initialize_logger, log_opportunities
 
 def run_arb_scan(settings: Settings, snapshot: bool = True) -> int:
     events = fetch_all_live(

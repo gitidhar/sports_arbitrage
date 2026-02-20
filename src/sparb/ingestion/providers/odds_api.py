@@ -1,7 +1,7 @@
 # src/sports_arbitrage/ingestion/providers/odds_api.py
 import requests
 import time
-from src.ingestion.http.backoff import get_with_backoff
+from sparb.ingestion.http.backoff import get_with_backoff
 
 SPORTS_URL = "https://api.the-odds-api.com/v4/sports"
 ODDS_URL = "https://api.the-odds-api.com/v4/sports/{}/odds"
