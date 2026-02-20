@@ -1,5 +1,6 @@
 # src/sports_arbitrage/ingestion/providers/odds_api.py
 import requests
+import time
 
 SPORTS_URL = "https://api.the-odds-api.com/v4/sports"
 ODDS_URL = "https://api.the-odds-api.com/v4/sports/{}/odds"
@@ -35,5 +36,6 @@ def fetch_odds_for_sport(
 def fetch_all_live(api_key: str, regions: str, markets: str, odds_format: str, date_format: str) -> list[dict]:
     events: list[dict] = []
     for sk in fetch_active_sport_keys(api_key):
+        time.sleep(1.1)
         events.extend(fetch_odds_for_sport(api_key, sk, regions, markets, odds_format, date_format))
     return events
