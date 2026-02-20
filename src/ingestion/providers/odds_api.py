@@ -27,6 +27,7 @@ def fetch_odds_for_sport(
     }
     resp = requests.get(ODDS_URL.format(sport_key), params=params, timeout=10)
     if resp.status_code != 200:
+        print("Odds API error:", resp.status_code, resp.text[:200])
         return []
     data = resp.json()
     return data if data else []

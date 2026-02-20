@@ -23,7 +23,7 @@ def analyze_for_arb(events: list[dict], bankroll: float, market_key: str="h2h") 
                 for outcome in mk.get("outcomes", []):
                     name = outcome["name"]
                     price = float(outcome["price"])
-                    if price > best_price.get("name", 0.0):
+                    if price > best_price.get(name, 0.0):
                         best_price[name] = price
                         best_book[name] = bm.get("key", "")
         
@@ -38,7 +38,7 @@ def analyze_for_arb(events: list[dict], bankroll: float, market_key: str="h2h") 
             n: stakes[n] * (price - 1) - (bankroll - stakes[n])
             for n, price in best_price.items()
         }
-        guaranteed_profit = round(next(iter(profits.values())), 2) # technically all stake outcomes are equal
+        guaranteed_profit = round(min(profits.values()), 2) # technically all stake outcomes are equal
         legs : list[OpportunityLeg] = []
         for n in best_price:
             legs.append(OpportunityLeg(
