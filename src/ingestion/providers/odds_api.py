@@ -1,6 +1,7 @@
 # src/sports_arbitrage/ingestion/providers/odds_api.py
 import requests
 import time
+from src.ingestion.http.backoff import get_with_backoff
 
 SPORTS_URL = "https://api.the-odds-api.com/v4/sports"
 ODDS_URL = "https://api.the-odds-api.com/v4/sports/{}/odds"
@@ -26,7 +27,7 @@ def fetch_odds_for_sport(
         "oddsFormat": odds_format,
         "dateFormat": date_format,
     }
-    resp = requests.get(ODDS_URL.format(sport_key), params=params, timeout=10)
+    resp = get_with_backoff(ODDS_URL.format(sport_key), params=params)
     if resp.status_code != 200:
         print("Odds API error:", resp.status_code, resp.text[:200])
         return []
