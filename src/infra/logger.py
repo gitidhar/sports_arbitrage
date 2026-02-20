@@ -1,7 +1,9 @@
 import logging
 from src.domain.models import ArbitrageOpportunity
+from pathlib import Path
 
 def initialize_logger(log_path: str) -> logging.Logger:
+    Path(log_path).parent.mkdir(parents=True, exist_ok=True)
     logger = logging.getLogger("arbs")
     logger.setLevel(logging.INFO)
     if not logger.handlers:

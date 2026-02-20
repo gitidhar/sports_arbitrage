@@ -7,7 +7,7 @@ def size_bank_roll(prices: dict[str, float], implied_sum, bankroll: float):
     return stakes
 
 
-def analyze_for_arb(events: list[dict], bankroll: float, mrkt_key: str="h2h") -> list[ArbitrageOpportunity]:
+def analyze_for_arb(events: list[dict], bankroll: float, market_key: str="h2h") -> list[ArbitrageOpportunity]:
     opportunities: list[ArbitrageOpportunity] = []
     for event in events:
         home = event.get("home_team", "")
@@ -19,7 +19,7 @@ def analyze_for_arb(events: list[dict], bankroll: float, mrkt_key: str="h2h") ->
 
         for bm in books:
             for mk in bm.get("markets", []):
-                if mk.get("key") != mrkt_key: continue
+                if mk.get("key") != market_key: continue
                 for outcome in mk.get("outcomes", []):
                     name = outcome["name"]
                     price = float(outcome["price"])
