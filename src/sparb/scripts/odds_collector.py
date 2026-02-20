@@ -1,6 +1,6 @@
 import os, time, requests, pandas as pd, pathlib
 from dotenv import load_dotenv
-from arb_engine import scan_arbs
+from sparb.scripts.arb_engine import scan_arbs
 
 load_dotenv()
 API_KEY = os.getenv("ODDS_API_KEY")
