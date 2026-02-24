@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparb"
+version = "0.1.0"
+description = "fuck you need a description for"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "requests",
+  "python-dotenv",
+  "pandas"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
