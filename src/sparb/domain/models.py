@@ -1,9 +1,12 @@
+from dataclasses import dataclass
+
+@dataclass
 class OpportunityLeg:
     outcome_name: str
     price: float
     bookmaker_key: str
     stake: float
-
+@dataclass
 class ArbitrageOpportunity:
     home_team: str
     away_team: str

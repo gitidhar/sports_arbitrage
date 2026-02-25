@@ -14,3 +14,12 @@ arbs.txt
 
 #intermediate prices 
 prices.csv
+
+# notes
+notes.txt
+
+#pkg
+sparb.egg-info/
+
+# .vscode/
+.vscode/

@@ -20,4 +20,5 @@ def get_with_backoff(url: str, params: dict, timeout: int= 10, max_retries: int 
 
         delay = min(delay * 2, 60)
         time.sleep(sleep_s)
+        print("backed off")
     return resp

@@ -13,7 +13,7 @@ class Settings:
     bankroll: float = 100.0
     market_key: str = "h2h"
     snapshot_csv_path: str = "data/prices.csv"
-    arbs_log_path: str = "outputs/arbs.txt"
+    arbs_log_path: str = "src/sparb/outputs/arbs.txt"
 
 def load_settings() -> Settings:
     load_dotenv()

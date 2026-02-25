@@ -10,7 +10,7 @@ def fetch_active_sport_keys(api_key: str) -> list[str]:
     resp = requests.get(SPORTS_URL, params={"apiKey": api_key}, timeout=10)
     resp.raise_for_status()
     sports = resp.json()
-    return [s["key"] for s in sports if s.get("active")]
+    return [s["key"] for s in sports if s.get("active") and not s.get("has_outrights")]
 
 def fetch_odds_for_sport(
     api_key: str,
